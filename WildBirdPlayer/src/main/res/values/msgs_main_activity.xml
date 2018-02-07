@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="msgs_menu_settings">Settings</string>
+    <string name="msgs_menu_refresh">Refresh</string>
+    <string name="msgs_menu_clear_cache">Recreate cache</string>
+    <string name="msgs_menu_exit">Exit</string>
+    <string name="msgs_menu_uninstall">Uninstall</string>
+    
+    <string name="msgs_main_confirm_termination">Do you want to terminate application?</string>
+    <string name="msgs_main_confirm_recreate_cache_file">Do you want to re-create cache file for picture？</string>
+    <string name="msgs_main_player_mp_error" formatted="false">Media player error=%s, extra=%s</string>
+    
+    <string name="msgs_main_player_folder_spinner_title">Select a folder</string>
+    <string name="msgs_main_player_file_spinner_title">Select a file</string>
+    
+    <string name="msgs_main_no_music_file">No music file found, respecify scan folder by setteings</string>
+    
+    <string name="msgs_main_building_file_list_title">Creating the cache file</string>
+    <string name="msgs_main_building_file_list_msg_main">Please a wait until cache file creation was finished</string>
+    <string name="msgs_main_building_file_list_msg_image" formatted="false">Creating the cache %s%% completed、%s"</string>
+    
+    <string name="msgs_main_building_file_list_caninit">Cancel</string>
+    <string name="msgs_main_building_file_list_canpressed">Cancelling</string>
+    
+    <string name="msgs_main_filelist_and_folder_was_not_sync">File can not read, please execute refresh or restart application</string>
+    
+</resources>

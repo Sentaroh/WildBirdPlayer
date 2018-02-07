@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.sentaroh.android.Utilities.Preference.DirectorySelectPreference
+		android:key="@string/settings_scan_folder"
+		android:title="@string/settings_scan_folder_title"
+		android:summary="@string/settings_scan_folder_summary"
+		android:inputType="text"/>
+    	    
+</PreferenceScreen>

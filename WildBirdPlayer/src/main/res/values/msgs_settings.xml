@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_main_title">Settings</string>
+    <string name="settings_main_ui_title">User interface</string>
+    <string name="settings_main_scan_title">Folder</string>
+    <string name="settings_main_misc_title">Miscellaneous</string>
+    
+    <string name="settings_default_current_setting">Current=</string>
+
+    <string name="settings_player_volume">settings_player_volume</string>
+    
+    <string name="settings_player_when_player_file_switched_playback_title">Playback</string>
+	<string name="settings_player_when_player_file_switched_playback_summary_ena">Playing the file when file switching</string>
+	<string name="settings_player_when_player_file_switched_playback">settings_player_when_player_file_switched_playback</string>
+
+	<string name="settings_player_max_screen_brightness_when_image_showed_title">Screen brightness</string>
+	<string name="settings_player_max_screen_brightness_when_image_showed_summary_ena">Max brightness when image showed</string>
+	<string name="settings_player_max_screen_brightness_when_image_showed">settings_player_max_screen_brightness_when_image_showed</string>
+
+	<string name="settings_show_audio_file_artwork_title">Display artwork option</string>
+	<string name="settings_show_audio_file_artwork_summary"></string>
+	<string name="settings_show_audio_file_artwork_dialog_title">Select display artwork option</string>
+	<string name="settings_show_audio_file_artwork">settings_show_audio_file_artwork</string>
+	<string-array name="settings_show_audio_file_artwork_list_entries">
+        <item>Show before image file</item>
+        <item>Show after image file</item>
+        <item>Do not show</item>
+    </string-array>
+	<string-array name="settings_show_audio_file_artwork_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+		
+	<string name="settings_startup_player_position_resumed_title">Startup screen</string>
+	<string name="settings_startup_player_position_resumed_summary_ena">Restore the last time</string>
+	<string name="settings_startup_player_position_resumed">settings_startup_player_position_resumed</string>
+
+    <string name="settings_show_decription_full_screen_title">Show description</string>
+    <string name="settings_show_decription_full_screen_summary_ena">Show description by full screen</string>
+	<string name="settings_show_decription_full_screen">settings_show_decription_full_screen</string>
+
+	<string name="settings_description_text_size_title">Text size of description</string>
+	<string name="settings_description_text_size_summary">Current setting=</string>
+	<string name="settings_description_text_size_dialog_title">Select text size</string>
+	<string name="settings_description_text_size">settings_description_text_size</string>
+	<string-array name="settings_description_text_size_list_entries">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>XLarge</item>
+    </string-array>
+	<string-array name="settings_description_text_size_list_values">
+        <item>100</item>
+        <item>120</item>
+        <item>150</item>
+        <item>200</item>
+    </string-array>
+					
+	<string name="settings_scan_folder">settings_scan_folder</string>
+    <string name="settings_scan_folder_title">Scan folder</string>
+    <string name="settings_scan_folder_summary">Scan music file folder</string>
+
+    <string name="settings_debug_enable_title">Debug info</string>
+	<string name="settings_debug_enable_summary_ena">Put Debug info to logcat</string>
+	<string name="settings_debug_enable">settings_debug_enable</string>
+
+    <string name="settings_exit_cleanly_title">Processing of the application at the end</string>
+	<string name="settings_exit_cleanly_summary_ena">Process is killed on exit.</string>
+	<string name="settings_exit_cleanly">settings_exit_cleanly</string>
+		
+</resources>

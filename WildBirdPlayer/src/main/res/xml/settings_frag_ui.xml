@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+  	<CheckBoxPreference
+		android:key="settings_player_when_player_file_switched_playback"
+		android:title="@string/settings_player_when_player_file_switched_playback_title"
+		android:summary="@string/settings_player_when_player_file_switched_playback_summary_ena" />
+  	<CheckBoxPreference
+		android:key="settings_player_max_screen_brightness_when_image_showed"
+		android:title="@string/settings_player_max_screen_brightness_when_image_showed_title"
+		android:summary="@string/settings_player_max_screen_brightness_when_image_showed_summary_ena" />
+    <ListPreference
+		android:key="settings_show_audio_file_artwork"
+		android:title="@string/settings_show_audio_file_artwork_title"
+		android:summary="@string/settings_show_audio_file_artwork_summary"
+		android:dialogTitle="@string/settings_show_audio_file_artwork_dialog_title"
+		android:entries="@array/settings_show_audio_file_artwork_list_entries"
+		android:entryValues="@array/settings_show_audio_file_artwork_list_values"/>
+  		
+  	<CheckBoxPreference
+		android:key="settings_startup_player_position_resumed"
+		android:title="@string/settings_startup_player_position_resumed_title"
+		android:summary="@string/settings_startup_player_position_resumed_summary_ena" />
+  	<CheckBoxPreference
+		android:key="settings_show_decription_full_screen"
+		android:title="@string/settings_show_decription_full_screen_title"
+		android:summary="@string/settings_show_decription_full_screen_summary_ena" />
+    <ListPreference
+		android:key="settings_description_text_size"
+		android:title="@string/settings_description_text_size_title"
+		android:summary="@string/settings_description_text_size_summary"
+		android:dialogTitle="@string/settings_description_text_size_dialog_title"
+		android:entries="@array/settings_description_text_size_list_entries"
+		android:entryValues="@array/settings_description_text_size_list_values"/>
+  						  		
+</PreferenceScreen>

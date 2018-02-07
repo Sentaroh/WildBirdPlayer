@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_main_title">設定</string>
+    <string name="settings_main_ui_title">ユーザーインターフェース</string>
+    <string name="settings_main_scan_title">フォルダー</string>
+    <string name="settings_main_misc_title">その他</string>
+    
+    <string name="settings_default_current_setting">現設定=</string>
+    
+    <string name="settings_player_when_player_file_switched_playback_title">ファイル切替時の再生</string>
+	<string name="settings_player_when_player_file_switched_playback_summary_ena">再生する</string>
+	<string name="settings_player_when_player_file_switched_playback">settings_player_when_player_file_switched_playback</string>
+
+	<string name="settings_player_max_screen_brightness_when_image_showed_title">スクリーン輝度</string>
+	<string name="settings_player_max_screen_brightness_when_image_showed_summary_ena">イメージ表示時に最高輝度にする</string>
+	<string name="settings_player_max_screen_brightness_when_image_showed">settings_player_max_screen_brightness_when_image_showed</string>
+
+	<string name="settings_show_audio_file_artwork_title">オーディオファイルのアートワーク表示</string>
+	<string name="settings_show_audio_file_artwork_summary"></string>
+	<string name="settings_show_audio_file_artwork_dialog_title">アートワーク表示方法の選択</string>
+	<string name="settings_show_audio_file_artwork">settings_show_audio_file_artwork</string>
+	<string-array name="settings_show_audio_file_artwork_list_entries">
+        <item>JPGファイルの前に表示</item>
+        <item>JPGファイルの後に表示</item>
+        <item>表示しない</item>
+    </string-array>
+	<string-array name="settings_show_audio_file_artwork_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+		
+	<string name="settings_startup_player_position_resumed_title">起動時の画面</string>
+	<string name="settings_startup_player_position_resumed_summary_ena">前回終了時に表示されているファイルを復元</string>
+	<string name="settings_startup_player_position_resumed">settings_startup_player_position_resumed</string>
+
+    <string name="settings_show_decription_full_screen_title">説明の表示</string>
+    <string name="settings_show_decription_full_screen_summary_ena">画面一杯に説明を表示</string>
+	<string name="settings_show_decription_full_screen">settings_show_decription_full_screen</string>
+
+	<string name="settings_description_text_size_title">説明の文字サイズ</string>
+	<string name="settings_description_text_size_summary">現在の設定=</string>
+	<string name="settings_description_text_size_dialog_title">文字サイズの選択</string>
+	<string name="settings_description_text_size">settings_description_text_size</string>
+	<string-array name="settings_description_text_size_list_entries">
+        <item>小</item>
+        <item>中</item>
+        <item>大</item>
+        <item>特大</item>
+    </string-array>
+									
+    <string name="settings_scan_folder">settings_scan_folder</string>
+    <string name="settings_scan_folder_title">スキャンするフォルダー</string>
+    <string name="settings_scan_folder_summary">スキャンするフォルダー</string>
+
+    <string name="settings_debug_enable_title">デバッグ情報</string>
+	<string name="settings_debug_enable_summary_ena">デバッグ情報をLOGCATに書き出す</string>
+	<string name="settings_debug_enable">settings_debug_enable</string>
+
+    <string name="settings_exit_cleanly_title">アプリケーション終了時の処理</string>
+	<string name="settings_exit_cleanly_summary_ena">プロセスをKill</string>
+	<string name="settings_exit_cleanly">settings_exit_cleanly</string>
+		
+</resources>

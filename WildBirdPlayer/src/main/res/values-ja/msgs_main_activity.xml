@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="msgs_menu_settings">設定</string>
+    <string name="msgs_menu_refresh">リフレッシュ</string>
+    <string name="msgs_menu_clear_cache">キャッシュ再作成</string>
+    <string name="msgs_menu_exit">終了</string>
+    <string name="msgs_menu_uninstall">アンインストール</string>
+    
+    <string name="msgs_main_confirm_termination">WildBirdPlayerを終了しますか？</string>
+    <string name="msgs_main_confirm_recreate_cache_file">写真のキャッシュを再作成しますか？</string>
+    <string name="msgs_main_player_mp_error" formatted="false">Media player error error=%s, extra=%s</string>
+
+    <string name="msgs_main_player_folder_spinner_title">フォルダーを選択してください</string>
+    <string name="msgs_main_player_file_spinner_title">ファイルを選択してください</string>
+    
+    <string name="msgs_main_no_music_file">音楽ファイルが見つかりません、設定でスキャンするフォルダーを指定してください</string>
+
+    <string name="msgs_main_building_file_list_title">キャッシュファイルの作成</string>
+    <string name="msgs_main_building_file_list_msg_main">キャッシュファイル作成が終了するまでお待ちください</string>
+    <string name="msgs_main_building_file_list_msg_image" formatted="false">イメージキャッシュ作成 %s%%終了、%s"</string>
+    <string name="msgs_main_building_file_list_caninit">中止</string>
+    <string name="msgs_main_building_file_list_canpressed">中止中</string>
+    
+    <string name="msgs_main_filelist_and_folder_was_not_sync">ファイルを読み込めません、リフレッシュを実行するかアプリケーションを再起動してください。</string>
+    
+</resources>

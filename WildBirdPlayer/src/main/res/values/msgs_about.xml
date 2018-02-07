@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="msgs_menu_about">About WildBirdPlayer</string>
+    <string name="msgs_about_wild_bird_player">WildBirdPlayer</string>
+    <string name="msgs_about_dlg_func_html">WildBirdPlayerDesc_JA.htm</string>
+</resources>
