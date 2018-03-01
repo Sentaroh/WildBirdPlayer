@@ -26,6 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcel;
@@ -267,11 +268,21 @@ public class DirectorySelectPreferenceWithMountpoint extends DialogPreference {
 	    	mLocalMountPointSpinner.setEnabled(false);
 	    } else {
 	    	mLocalMountPointSpinner.setEnabled(true);
+	    	int jk=0;
 	    	for (int i=0;i<ml.size();i++) {
-	    		adapter.add(ml.get(i));
-	    		if (mDialogDirName.startsWith(ml.get(i))) {
-	    			sel_no=i;
-	    		}
+	    	    if (Build.VERSION.SDK_INT>=22) {//Android 5.0以上
+                    if (ml.get(i).startsWith("/storage/") &&
+                            ml.get(i).indexOf("/Android/data")==-1) {
+                        adapter.add(ml.get(i));
+                        sel_no=jk;
+                        jk++;
+                    }
+                } else {
+                    adapter.add(ml.get(i));
+                    if (mDialogDirName.startsWith(ml.get(i))) {
+                        sel_no=i;
+                    }
+                }
 	    	}
 	    	if (mTreeFilelistArrayList==null) {
 	    		mLocalMountPointSpinnerSelectedPos=sel_no;
