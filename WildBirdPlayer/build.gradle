@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "26.0.3"
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.sentaroh.android.WildBirdPlayer"
@@ -33,7 +33,7 @@ android {
                         def mod_name = variant.getPackageApplication().projectBaseName
                         def fileExtension= outputFileName.toString().substring(outputFileName.toString().lastIndexOf(".")+1)
 //                        def newName = "${mod_name}_${versionName}_${versionNumber}_${date}.${fileExtension}"
-                        def newName = "${mod_name}_${versionName}_${versionNumber}_debug.${fileExtension}"
+                        def newName = "${mod_name}_debug.${fileExtension}"
                         outputFileName = "../../../../../release/"+newName
                     }
                 }
