@@ -173,9 +173,7 @@ public class MainActivity extends AppCompatActivity {
         mContext=this;
         mFragmentManager=getSupportFragmentManager();
         mRestartStatus=0;
-        if (mGlblParms==null) {
-        	mGlblParms=(GlobalParameters)getApplication();
-        }
+       	mGlblParms=GlobalWorkArea.getGlobalParameters(mContext);
     	mGlblParms.mainResources=getResources();
     	mGlblParms.appContext=this.getApplicationContext();
         
@@ -184,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
             Thread.currentThread().setUncaughtExceptionHandler(unCaughtExceptionHandler);
         }
 
-        mGlblParms.initSettingParms();
-        mGlblParms.loadSettingParms();
+        mGlblParms.initSettingParms(mContext);
+        mGlblParms.loadSettingParms(mContext);
 
         if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onCreate entered");
 		
@@ -566,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
 	private void applySettingParms() {
 		String p_sf=mGlblParms.settingScanFolder;
 		String p_awo=mGlblParms.settingDisplayArtworkOption;
-		mGlblParms.loadSettingParms();
+		mGlblParms.loadSettingParms(mContext);
 		if (mGlblParms.fragmentPlayer!=null) {
 			mGlblParms.fragmentPlayer.setDescriptionTextSize();
 			mGlblParms.fragmentPlayer.setDescriptionDisplayMode();
@@ -719,9 +717,7 @@ public class MainActivity extends AppCompatActivity {
 	@SuppressWarnings("unused")
 	private static byte[] mByteBuf=null;
 	@SuppressLint("DefaultLocale")
-	final private void readFileList(GlobalParameters mGlblParms,
-			ArrayList<MusicFileListItem> masterFileList,
-			ArrayList<MusicFileListItem> newFileList,
+	final private void readFileList(GlobalParameters mGlblParms,ArrayList<MusicFileListItem> masterFileList,ArrayList<MusicFileListItem> newFileList,
 			String path, String basePath) {
 		File lf=new File(path);
 		if (lf.exists()) {

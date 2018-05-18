@@ -30,6 +30,7 @@ import android.util.Log;
 
 import com.sentaroh.android.Utilities.Preference.DirectorySelectPreference;
 
+
 public class ScanFolderDirectorySelectPreference extends DirectorySelectPreference {
 
     public ScanFolderDirectorySelectPreference(Context context, AttributeSet attrs) {

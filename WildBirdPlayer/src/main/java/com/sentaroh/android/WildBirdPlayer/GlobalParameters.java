@@ -62,54 +62,59 @@ public class GlobalParameters extends Application{
 //		Log.v("GlobalParms","onConfigurationChanged");
 //	};
 	
-	@SuppressLint("SdCardPath")
-	@Override
-	public void  onCreate() {
-		super.onCreate();
+//	@SuppressLint("SdCardPath")
+//	@Override
+//	public void  onCreate() {
+//		super.onCreate();
+////		Log.v("GlobalParms","onCreate entered");
+//		loadSettingParms();
+//	};
+
+    public void  initGlobalParameter(Context c) {
 //		Log.v("GlobalParms","onCreate entered");
-		loadSettingParms();
-	};
-	
-	public void loadSettingParms() {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        loadSettingParms(c);
+    };
+
+    public void loadSettingParms(Context c) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
 		String ed=Environment.getExternalStorageDirectory().toString();
 		settingPlaybackWhenPlayerFileSwitched=
-				prefs.getBoolean(getString(R.string.settings_player_when_player_file_switched_playback),false);
+				prefs.getBoolean(c.getString(R.string.settings_player_when_player_file_switched_playback),false);
 		settingScanFolder=
-				prefs.getString(getString(R.string.settings_scan_folder),ed+"/Music");
+				prefs.getString(c.getString(R.string.settings_scan_folder),ed+"/Music");
 		debugEnabled=
-				prefs.getBoolean(getString(R.string.settings_debug_enable),false);
+				prefs.getBoolean(c.getString(R.string.settings_debug_enable),false);
 		settingExitCleanly=
-				prefs.getBoolean(getString(R.string.settings_exit_cleanly),false);
+				prefs.getBoolean(c.getString(R.string.settings_exit_cleanly),false);
 		settingPlayBackVolume=
-				prefs.getInt(getString(R.string.settings_player_volume),100);
+				prefs.getInt(c.getString(R.string.settings_player_volume),100);
 		settingMaxBrightnessWhenImageShowed=
-				prefs.getBoolean(getString(R.string.settings_player_max_screen_brightness_when_image_showed),true);
+				prefs.getBoolean(c.getString(R.string.settings_player_max_screen_brightness_when_image_showed),true);
 		settingStartupPlayerPositionResumed=
-				prefs.getBoolean(getString(R.string.settings_startup_player_position_resumed),true);
+				prefs.getBoolean(c.getString(R.string.settings_startup_player_position_resumed),true);
 		wildBirdPlayerHomeDir=Environment.getExternalStorageDirectory().toString()+
 				"/WildBirdPlayer";
 		settingShowDescrptionByFullscreen=
-				prefs.getBoolean(getString(R.string.settings_show_decription_full_screen),false);
+				prefs.getBoolean(c.getString(R.string.settings_show_decription_full_screen),false);
 		settingDescrptionTextSize=Integer.parseInt(
-				prefs.getString(getString(R.string.settings_description_text_size),"100"));
+				prefs.getString(c.getString(R.string.settings_description_text_size),"100"));
 		settingDisplayArtworkOption=
-				prefs.getString(getString(R.string.settings_show_audio_file_artwork),"0");
+				prefs.getString(c.getString(R.string.settings_show_audio_file_artwork),"0");
 	};
 	
-	public void initSettingParms() {
+	public void initSettingParms(Context c) {
 		SharedPreferences prefs = 
-				PreferenceManager.getDefaultSharedPreferences(this);
+				PreferenceManager.getDefaultSharedPreferences(c);
 		String ed=Environment.getExternalStorageDirectory().toString();
-		if (prefs.getString(getString(R.string.settings_scan_folder),"").equals("")) {
-			prefs.edit().putString(getString(R.string.settings_scan_folder),ed+"/Music").commit();
+		if (prefs.getString(c.getString(R.string.settings_scan_folder),"").equals("")) {
+			prefs.edit().putString(c.getString(R.string.settings_scan_folder),ed+"/Music").commit();
 			
-			prefs.edit().putBoolean(getString(R.string.settings_player_when_player_file_switched_playback),false).commit();
-			prefs.edit().putBoolean(getString(R.string.settings_debug_enable),false).commit();
-			prefs.edit().putBoolean(getString(R.string.settings_exit_cleanly),false).commit();
-			prefs.edit().putInt(getString(R.string.settings_player_volume),100).commit();
-			prefs.edit().putBoolean(getString(R.string.settings_player_max_screen_brightness_when_image_showed),true).commit();
-			prefs.edit().putBoolean(getString(R.string.settings_startup_player_position_resumed),true).commit();
+			prefs.edit().putBoolean(c.getString(R.string.settings_player_when_player_file_switched_playback),false).commit();
+			prefs.edit().putBoolean(c.getString(R.string.settings_debug_enable),false).commit();
+			prefs.edit().putBoolean(c.getString(R.string.settings_exit_cleanly),false).commit();
+			prefs.edit().putInt(c.getString(R.string.settings_player_volume),100).commit();
+			prefs.edit().putBoolean(c.getString(R.string.settings_player_max_screen_brightness_when_image_showed),true).commit();
+			prefs.edit().putBoolean(c.getString(R.string.settings_startup_player_position_resumed),true).commit();
 		}
 	};
 	

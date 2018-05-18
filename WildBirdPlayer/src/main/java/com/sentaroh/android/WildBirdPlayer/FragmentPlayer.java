@@ -211,10 +211,10 @@ public class FragmentPlayer extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMainActivity=(MainActivity) getActivity();
-        mGlblParms=(GlobalParameters)getActivity().getApplication();
+        mContext=getActivity().getApplicationContext();
+        mGlblParms=GlobalWorkArea.getGlobalParameters(mContext);
         if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onCreate entered, savedInstanceState="+savedInstanceState);
 //      setRetainInstance(true);
-        mContext=getActivity().getApplicationContext();
         mResources=getResources();
         mFragmentManager=getFragmentManager();
 
