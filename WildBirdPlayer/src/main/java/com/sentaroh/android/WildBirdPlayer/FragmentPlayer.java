@@ -394,7 +394,7 @@ public class FragmentPlayer extends Fragment{
 	};
 	
 	private void initFolderSpinner() {
-		CustomSpinnerAdapter mAdapterFolderSpinner = new CustomSpinnerAdapter(mContext, R.layout.custom_simple_spinner_item);
+		CustomSpinnerAdapter mAdapterFolderSpinner = new CustomSpinnerAdapter(mContext, android.R.layout.simple_spinner_item);
 		for (int i=0;i<mGlblParms.masterFolderList.size();i++) {
 			FolderListItem fli=mGlblParms.masterFolderList.get(i);
 			if (fli.folderName.lastIndexOf("/")>=0) {
@@ -404,7 +404,7 @@ public class FragmentPlayer extends Fragment{
 				mAdapterFolderSpinner.add(fli.folderName);
 			}
 		}
-		mAdapterFolderSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		mAdapterFolderSpinner.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
 		mFolderSpinner.setPrompt(mContext.getString(R.string.msgs_main_player_folder_spinner_title));
 		mFolderSpinner.setAdapter(mAdapterFolderSpinner);
 		mFolderSpinner.setSelected(true);
@@ -455,7 +455,7 @@ public class FragmentPlayer extends Fragment{
 	};
 	
 	private void initFileSpinner(int folder_pos) {
-		CustomSpinnerAdapter mAdapterFileSpinner = new CustomSpinnerAdapter(mContext, R.layout.custom_simple_spinner_item);
+		CustomSpinnerAdapter mAdapterFileSpinner = new CustomSpinnerAdapter(mContext, android.R.layout.simple_spinner_item);
 		String folder=mGlblParms.masterFolderList.get(folder_pos).folderName;
 		mGlblParms.viewedFileList=new ArrayList<MusicFileListItem>();
 		for (int i=0;i<mGlblParms.masterFileList.size();i++) {
@@ -464,7 +464,7 @@ public class FragmentPlayer extends Fragment{
 				mAdapterFileSpinner.add(mGlblParms.masterFileList.get(i).musicFileName);
 			}
 		}
-		mAdapterFileSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		mAdapterFileSpinner.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
 		mFileSpinner.setPrompt(mContext.getString(R.string.msgs_main_player_file_spinner_title));
 		mFileSpinner.setAdapter(mAdapterFileSpinner);
 		mFileSpinner.setSelected(true);

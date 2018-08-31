@@ -65,7 +65,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-	public GlobalParameters mGlblParms=null;
+	public GlobalParameters mGp=null;
 	
 	private boolean mTerminateApplication=false;
 	private int mRestartStatus=0;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 	final public void onConfigurationChanged(final Configuration newConfig) {
 	    // Ignore orientation change to keep activity from restarting
 	    super.onConfigurationChanged(newConfig);
-	    if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onConfigurationChanged Entered");
+	    if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onConfigurationChanged Entered");
 	    
 	    
 //		Bundle sb=new Bundle();
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override  
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onSaveInstanceState entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onSaveInstanceState entered");
 		saveViewContents(outState);
 	};  
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override  
 	protected void onRestoreInstanceState(Bundle savedState) {  
 		super.onRestoreInstanceState(savedState);
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onRestoreInstanceState entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onRestoreInstanceState entered");
 		restoreViewContents(savedState);
 		mRestartStatus=2;
 	};
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void uncaughtException(Thread thread, Throwable ex) {
             	Thread.currentThread().setUncaughtExceptionHandler(defaultUEH);
-            	if (mGlblParms.debugEnabled) {
+            	if (mGp.debugEnabled) {
                 	ex.printStackTrace();
                 	StackTraceElement[] st=ex.getStackTrace();
                 	String st_msg="";
@@ -173,23 +173,23 @@ public class MainActivity extends AppCompatActivity {
         mContext=this;
         mFragmentManager=getSupportFragmentManager();
         mRestartStatus=0;
-       	mGlblParms=GlobalWorkArea.getGlobalParameters(mContext);
-    	mGlblParms.mainResources=getResources();
-    	mGlblParms.appContext=this.getApplicationContext();
+       	mGp=GlobalWorkArea.getGlobalParameters(mContext);
+    	mGp.mainResources=getResources();
+    	mGp.appContext=this.getApplicationContext();
         
         if (defaultUEH==null) {
     		defaultUEH = Thread.currentThread().getUncaughtExceptionHandler();
             Thread.currentThread().setUncaughtExceptionHandler(unCaughtExceptionHandler);
         }
 
-        mGlblParms.initSettingParms(mContext);
-        mGlblParms.loadSettingParms(mContext);
+        mGp.initSettingParms(mContext);
+        mGp.loadSettingParms(mContext);
 
-        if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onCreate entered");
+        if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onCreate entered");
 		
         mActivityWindow=getWindow();
         
-        mGlblParms.commonDlg=new CommonDialog(mContext, mFragmentManager);
+        mGp.commonDlg=new CommonDialog(mContext, mFragmentManager);
 
         initViewWidget();
         
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onNewIntent entered, restartStatus="+mRestartStatus);
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onNewIntent entered, restartStatus="+mRestartStatus);
 		if (mRestartStatus==2) return;
 //    	String fp="";
 //		if (intent!=null) if (intent.getDataString()!=null) fp=intent.getDataString().replace("file://", "");
@@ -225,19 +225,19 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onStart entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onStart entered");
 	};
 
 	@Override
 	public void onRestart() {
 		super.onStart();
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onRestart entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onRestart entered");
 	};
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onResume entered, restartStatus="+mRestartStatus);
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onResume entered, restartStatus="+mRestartStatus);
 
 		setBackLightLevelToDefault();
 		NotifyEvent ntfy=new NotifyEvent(mContext);
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
 				} else if (mRestartStatus==1) {
 				} else if (mRestartStatus==2) {
 					FragmentTransaction ft=mFragmentManager.beginTransaction();
-					if (mGlblParms.fragmentPlayer!=null) ft.remove(mGlblParms.fragmentPlayer);
+					if (mGp.fragmentPlayer!=null) ft.remove(mGp.fragmentPlayer);
 					ft.setTransition(FragmentTransaction.TRANSIT_NONE);
 					ft.commitAllowingStateLoss();
 					startPlayerFragment();
@@ -283,16 +283,16 @@ public class MainActivity extends AppCompatActivity {
 	};
 	 
 	public void startPlayerFragment() {
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"startPlayerFragment entered, restartStatus="+mRestartStatus);
-		if (mGlblParms.masterFileList.size()>0) {
-			mGlblParms.fragmentPlayer=FragmentPlayer.newInstance();
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"startPlayerFragment entered, restartStatus="+mRestartStatus);
+		if (mGp.masterFileList.size()>0) {
+			mGp.fragmentPlayer=FragmentPlayer.newInstance();
 			FragmentTransaction ft=mFragmentManager.beginTransaction();
 			ft.setTransition(FragmentTransaction.TRANSIT_NONE);
-			ft.replace(R.id.main_player_fragment, mGlblParms.fragmentPlayer);
+			ft.replace(R.id.main_player_fragment, mGp.fragmentPlayer);
 //			ft.commit();
 			ft.commitAllowingStateLoss();
 		} else {
-			mGlblParms.commonDlg.showCommonDialog(false, "W",
+			mGp.commonDlg.showCommonDialog(false, "W",
 					mContext.getString(R.string.msgs_main_no_music_file), "", null);
 		}
 	};
@@ -300,26 +300,26 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onPause entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onPause entered");
         // Application process is follow
 	};
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onStop entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onStop entered");
         // Application process is follow
 	};
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onDestroy entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onDestroy entered");
         // Application process is follow
 
 		if (mTerminateApplication) {
 //			deleteTaskData();
-			if (mGlblParms.settingExitCleanly) {
+			if (mGp.settingExitCleanly) {
 				Handler hndl=new Handler();
 				hndl.postDelayed(new Runnable(){
 					@Override
@@ -328,14 +328,14 @@ public class MainActivity extends AppCompatActivity {
 					}
 				}, 200);
 			} else {
-				mGlblParms.commonDlg=null;
+				mGp.commonDlg=null;
 				mFragmentManager=null;
-				mGlblParms.fragmentPlayer=null;
-				mGlblParms.masterFileList=null;
-				mGlblParms.masterFolderList=null;
-				mGlblParms.viewedFileList=null;
+				mGp.fragmentPlayer=null;
+				mGp.masterFileList=null;
+				mGp.masterFolderList=null;
+				mGp.viewedFileList=null;
 				mContext=null;
-		    	mGlblParms=null;
+		    	mGp=null;
 				System.gc();
 			}
 		} else {
@@ -346,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-			if (mGlblParms.fragmentPlayer!=null && mGlblParms.fragmentPlayer.processBackKey()) {
+			if (mGp.fragmentPlayer!=null && mGp.fragmentPlayer.processBackKey()) {
 				return true;
 			} else {
 				confirmExit();
@@ -364,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onCreateOptionsMenu Entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onCreateOptionsMenu Entered");
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_menu, menu);
 		return true;
@@ -372,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onPrepareOptionsMenu Entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onPrepareOptionsMenu Entered");
         super.onPrepareOptionsMenu(menu);
         if (!mIsReloadFileListFinished) {
         	menu.findItem(R.id.action_refresh).setVisible(false);
@@ -384,7 +384,7 @@ public class MainActivity extends AppCompatActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) { 
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"onOptionsItemSelected Entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"onOptionsItemSelected Entered");
 		if (item.getItemId()==R.id.action_settings) invokeSettings();
 		else if (item.getItemId()==R.id.action_refresh) reloadFilelist();
 		else if (item.getItemId()==R.id.action_clear_cache) reCreateCacheFile();
@@ -414,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
 //			public void negativeResponse(Context c, Object[] o) {
 //			}
 //		});
-//		mGlblParms.commonDlg.showCommonDialog(true, "W",
+//		mGp.commonDlg.showCommonDialog(true, "W",
 //				mContext.getString(R.string.msgs_main_confirm_termination), "", ntfy);
 		mTerminateApplication=true;
 		finish();
@@ -488,13 +488,13 @@ public class MainActivity extends AppCompatActivity {
 	};
 
 	private void invokeSettings() {
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"invokeSettings Entered");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"invokeSettings Entered");
 		Intent intent = new Intent(this,SettingActivity.class);
 		startActivityForResult(intent,0);
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"Return from settings");
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"Return from settings");
 		if (requestCode==0) applySettingParms();
 	};
 	
@@ -504,10 +504,10 @@ public class MainActivity extends AppCompatActivity {
 		ntfy.setListener(new NotifyEventListener(){
 			@Override
 			public void positiveResponse(Context c, Object[] o) {
-//				mGlblParms.masterFileList.clear();
-//				mGlblParms.masterFileList=null;
-				deleteSavedFileList(mGlblParms);
-				ArtWorkUtil.deleteAllImageByteArray(mGlblParms);
+//				mGp.masterFileList.clear();
+//				mGp.masterFileList=null;
+				deleteSavedFileList(mGp);
+				ArtWorkUtil.deleteAllImageByteArray(mGp);
 				
 				finish();
 				Intent i = getBaseContext().getPackageManager()
@@ -521,7 +521,7 @@ public class MainActivity extends AppCompatActivity {
 			public void negativeResponse(Context c, Object[] o) {
 			}
 		});
-		mGlblParms.commonDlg.showCommonDialog(true, "W",
+		mGp.commonDlg.showCommonDialog(true, "W",
 				mContext.getString(R.string.msgs_main_confirm_recreate_cache_file), "", ntfy);
 	};
 
@@ -529,7 +529,7 @@ public class MainActivity extends AppCompatActivity {
 	private void reloadFilelist() {
 		mIsReloadFileListFinished=false;
 		invalidateOptionsMenu();
-		if (mGlblParms.fragmentPlayer!=null) mGlblParms.fragmentPlayer.savePlayerSettings();
+		if (mGp.fragmentPlayer!=null) mGp.fragmentPlayer.savePlayerSettings();
 		
 		final Handler hndl=new Handler();
 		NotifyEvent ntfy=new NotifyEvent(mContext);
@@ -539,15 +539,15 @@ public class MainActivity extends AppCompatActivity {
 				hndl.post(new Runnable(){
 					@Override
 					public void run() {
-						if (mGlblParms.fragmentPlayer!=null) {
+						if (mGp.fragmentPlayer!=null) {
 							mFragmentManager.beginTransaction()
-							.remove(mGlblParms.fragmentPlayer)
+							.remove(mGp.fragmentPlayer)
 							.commitAllowingStateLoss();
 //							.commit();
-							mGlblParms.fragmentPlayer=null;
+							mGp.fragmentPlayer=null;
 						}
 
-						mGlblParms.playerPositionResumedWhenReload=true;
+						mGp.playerPositionResumedWhenReload=true;
 						startPlayerFragment();
 						mIsReloadFileListFinished=true;
 						invalidateOptionsMenu();
@@ -562,17 +562,17 @@ public class MainActivity extends AppCompatActivity {
 	};
 	
 	private void applySettingParms() {
-		String p_sf=mGlblParms.settingScanFolder;
-		String p_awo=mGlblParms.settingDisplayArtworkOption;
-		mGlblParms.loadSettingParms(mContext);
-		if (mGlblParms.fragmentPlayer!=null) {
-			mGlblParms.fragmentPlayer.setDescriptionTextSize();
-			mGlblParms.fragmentPlayer.setDescriptionDisplayMode();
+		String p_sf=mGp.settingScanFolder;
+		String p_awo=mGp.settingDisplayArtworkOption;
+		mGp.loadSettingParms(mContext);
+		if (mGp.fragmentPlayer!=null) {
+			mGp.fragmentPlayer.setDescriptionTextSize();
+			mGp.fragmentPlayer.setDescriptionDisplayMode();
 		}
-		if (!p_sf.equals(mGlblParms.settingScanFolder)) reloadFilelist();
+		if (!p_sf.equals(mGp.settingScanFolder)) reloadFilelist();
 		else {
-			if (!p_awo.equals(mGlblParms.settingDisplayArtworkOption))
-				mGlblParms.fragmentPlayer.reshowBirdImage();
+			if (!p_awo.equals(mGp.settingDisplayArtworkOption))
+				mGp.fragmentPlayer.reshowBirdImage();
 		}
 	};
 
@@ -585,7 +585,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 			@Override
 			public void negativeResponse(Context c, Object[] o) {
-				if (mGlblParms.debugEnabled) 
+				if (mGp.debugEnabled) 
 					Log.v(APPLICATION_TAG,"buildFileList was cancelled");
 				tc.setDisabled();
 			}
@@ -610,7 +610,7 @@ public class MainActivity extends AppCompatActivity {
 				try {
 					wl.acquire();
 
-					String path=mGlblParms.settingScanFolder;
+					String path=mGp.settingScanFolder;
 					String t_path="", base_path="";
 					if (path.endsWith("/")) t_path=path.substring(0,path.length()-1);
 					else t_path=path;
@@ -625,9 +625,9 @@ public class MainActivity extends AppCompatActivity {
 					ArrayList<FolderListItem> masterFolderList=new ArrayList<FolderListItem>();
 //					ArrayList<ImageFileListItem> imageFileList=new ArrayList<ImageFileListItem>();
 //					long begin=System.currentTimeMillis();
-					if (mGlblParms.masterFileList==null) loadSavedFileList(mGlblParms, masterFileList);
+					if (mGp.masterFileList==null) loadSavedFileList(mGp, masterFileList);
 					else {
-						masterFileList.addAll(mGlblParms.masterFileList);
+						masterFileList.addAll(mGp.masterFileList);
 						for (int i=0;i<masterFileList.size();i++) {
 							masterFileList.get(i).fileListItemUpdated=false;
 							masterFileList.get(i).fileListItemRefered=false;
@@ -635,7 +635,7 @@ public class MainActivity extends AppCompatActivity {
 					}
 					
 					mByteBuf=new byte[DESCRIPTION_FILE_MAX_SIZE];
-					readFileList(mGlblParms, masterFileList, newFileList, path, base_path);
+					readFileList(mGp, masterFileList, newFileList, path, base_path);
 					mByteBuf=null;
 					
 					int m_sz=masterFileList.size();
@@ -659,21 +659,21 @@ public class MainActivity extends AppCompatActivity {
 					
 					buildFolderList(masterFileList, masterFolderList);
 
-					ArtWorkUtil.UpdateImageFileInfo(mGlblParms, tc, pdf, 
+					ArtWorkUtil.UpdateImageFileInfo(mGp, tc, pdf, 
 							masterFileList, path);
 
-					mGlblParms.masterFileList=masterFileList;
-					mGlblParms.viewedFileList=viewedFileList;
-					mGlblParms.masterFolderList=masterFolderList;
-//					createThumbnail(mGlblParms.masterFileList);
+					mGp.masterFileList=masterFileList;
+					mGp.viewedFileList=viewedFileList;
+					mGp.masterFolderList=masterFolderList;
+//					createThumbnail(mGp.masterFileList);
 					
-					for (int i=0;i<mGlblParms.masterFileList.size();i++)
-						if (mGlblParms.masterFileList.get(i).fileListItemUpdated) {
+					for (int i=0;i<mGp.masterFileList.size();i++)
+						if (mGp.masterFileList.get(i).fileListItemUpdated) {
 							file_list_save_required=true;
 							break;
 						}
 
-					if (file_list_save_required) saveFileList(mGlblParms, mGlblParms.masterFileList);
+					if (file_list_save_required) saveFileList(mGp, mGp.masterFileList);
 //					Log.v("","save elapsed="+(System.currentTimeMillis()-begin));
 //					begin=System.currentTimeMillis();
 
@@ -681,7 +681,7 @@ public class MainActivity extends AppCompatActivity {
 					pdf.dismissAllowingStateLoss();
 					p_ntfy.notifyToListener(true, null);
 					if (tc.isEnabled()) {
-						if (mGlblParms.debugEnabled) 
+						if (mGp.debugEnabled) 
 							Log.v(APPLICATION_TAG,"buildFileList was completed");
 					}
 				} finally {
@@ -717,7 +717,7 @@ public class MainActivity extends AppCompatActivity {
 	@SuppressWarnings("unused")
 	private static byte[] mByteBuf=null;
 	@SuppressLint("DefaultLocale")
-	final private void readFileList(GlobalParameters mGlblParms,ArrayList<MusicFileListItem> masterFileList,ArrayList<MusicFileListItem> newFileList,
+	final private void readFileList(GlobalParameters mGp,ArrayList<MusicFileListItem> masterFileList,ArrayList<MusicFileListItem> newFileList,
 			String path, String basePath) {
 		File lf=new File(path);
 		if (lf.exists()) {
@@ -726,7 +726,7 @@ public class MainActivity extends AppCompatActivity {
 				if (fa!=null) {
 					for (int i=0;i<fa.length;i++) {
 						if (fa[i].isDirectory()) {
-							readFileList(mGlblParms,
+							readFileList(mGp,
 									masterFileList, newFileList,  
 									(path+"/"+fa[i].getName()).replaceAll("//", "/"),
 									basePath);
@@ -741,7 +741,7 @@ public class MainActivity extends AppCompatActivity {
 //								Log.v("","mt1="+mt+",type="+ft);
 								if (mt!=null && mt.startsWith(ELIGIBLE_FILE_MIME_TYPE)) {
 									MusicFileListItem c_flci=
-										getMasterFileList(mGlblParms,masterFileList,folderName,fileName);
+										getMasterFileList(mGp,masterFileList,folderName,fileName);
 									
 									String description_file_name=fileName.replace("."+ft, "")+".htm";
 									String desc_fp=(path+"/"+description_file_name).replaceAll("//", "/");
@@ -832,17 +832,17 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 	
-	static private void deleteSavedFileList(GlobalParameters mGlblParms) {
-		File lf=new File(mGlblParms.wildBirdPlayerHomeDir+"/file_list_cache");
+	static private void deleteSavedFileList(GlobalParameters mGp) {
+		File lf=new File(mGp.wildBirdPlayerHomeDir+"/file_list_cache");
 		lf.delete();
 	};
 	
 	@SuppressWarnings("unchecked")
-	static private void loadSavedFileList(GlobalParameters mGlblParms, ArrayList<MusicFileListItem> mfl) {
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"loadSavedFileList entered");
+	static private void loadSavedFileList(GlobalParameters mGp, ArrayList<MusicFileListItem> mfl) {
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"loadSavedFileList entered");
 		long bt=System.currentTimeMillis();
 		try {
-			File lf=new File(mGlblParms.wildBirdPlayerHomeDir+"/file_list_cache");
+			File lf=new File(mGp.wildBirdPlayerHomeDir+"/file_list_cache");
 			FileInputStream fis=new FileInputStream(lf);
 			BufferedInputStream bis=new BufferedInputStream(fis,FILE_LIST_BUFFER_SIZE);
 			ZipInputStream zis=new ZipInputStream(bis);
@@ -854,7 +854,7 @@ public class MainActivity extends AppCompatActivity {
 				mfl.clear();
 				mfl.addAll(tfl);
 			} else {
-				if (mGlblParms.debugEnabled) 
+				if (mGp.debugEnabled) 
 					Log.v(APPLICATION_TAG,"Saved SID is not matched. Saved SID="+sid+", expected SID="+CACHE_LIST_SID);
 			}
 //			for(int i=0;i<mfl.size();i++) {
@@ -877,22 +877,22 @@ public class MainActivity extends AppCompatActivity {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"loadSavedFileList exited, elapsed="+(System.currentTimeMillis()-bt));
+		if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"loadSavedFileList exited, elapsed="+(System.currentTimeMillis()-bt));
 	};
 
 	private static final long CACHE_LIST_SID=3L;
-	static private void saveFileList(final GlobalParameters mGlblParms, 
+	static private void saveFileList(final GlobalParameters mGp, 
 			final ArrayList<MusicFileListItem> mfl) {
 		Thread th=new Thread() {
 			@Override
 			public void run() {
-				if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"saveFileList entered");		
+				if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"saveFileList entered");		
 				long bt=System.currentTimeMillis();
 				try {
-					File lfd=new File(mGlblParms.wildBirdPlayerHomeDir+"/");
+					File lfd=new File(mGp.wildBirdPlayerHomeDir+"/");
 					lfd.mkdirs();
-					File lf_tmp=new File(mGlblParms.wildBirdPlayerHomeDir+"/file_list_cache.tmp");
-					File lf_save=new File(mGlblParms.wildBirdPlayerHomeDir+"/file_list_cache");
+					File lf_tmp=new File(mGp.wildBirdPlayerHomeDir+"/file_list_cache.tmp");
+					File lf_save=new File(mGp.wildBirdPlayerHomeDir+"/file_list_cache");
 					FileOutputStream fos=new FileOutputStream(lf_tmp,false);
 					BufferedOutputStream bos=new BufferedOutputStream(fos,FILE_LIST_BUFFER_SIZE);
 					ZipOutputStream zos=new ZipOutputStream(bos);
@@ -913,15 +913,15 @@ public class MainActivity extends AppCompatActivity {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				if (mGlblParms.debugEnabled) Log.v(APPLICATION_TAG,"saveFileList exited, elapsed="+(System.currentTimeMillis()-bt));
+				if (mGp.debugEnabled) Log.v(APPLICATION_TAG,"saveFileList exited, elapsed="+(System.currentTimeMillis()-bt));
 			}
 		};
 		th.setPriority(Thread.MIN_PRIORITY);
 		th.start();
 	};
 
-//	static private void createThumbnail(GlobalParameters mGlblParms, ArrayList<FileListItem> mfl) {
-//		DisplayMetrics dm=mGlblParms.mainResources.getDisplayMetrics();
+//	static private void createThumbnail(GlobalParameters mGp, ArrayList<FileListItem> mfl) {
+//		DisplayMetrics dm=mGp.mainResources.getDisplayMetrics();
 //		for (int i=0;i<mfl.size();i++) {
 //			FileListItem fli=mfl.get(i);
 //			File lf=new File(fli.filePath+"/"+fli.fileName);
@@ -943,10 +943,10 @@ public class MainActivity extends AppCompatActivity {
 //			
 //			List<Artwork> al=f.getTag().getArtworkList();
 //			if (al!=null && al.size()!=0) {
-//				fli.thumbnaiBitmap = createThumbnaiBitmap(mGlblParms,
+//				fli.thumbnaiBitmap = createThumbnaiBitmap(mGp,
 //						al.get(0).getBinaryData(),dm);
 //			} else {
-//				Drawable dw=mGlblParms.mainResources.getDrawable(R.drawable.blank);
+//				Drawable dw=mGp.mainResources.getDrawable(R.drawable.blank);
 //				Bitmap c_bm = ((BitmapDrawable)dw).getBitmap();
 //				fli.thumbnaiBitmap=Bitmap.createScaledBitmap(c_bm, 64, 64, false);
 //				c_bm.recycle();
@@ -954,7 +954,7 @@ public class MainActivity extends AppCompatActivity {
 //		}
 //	};
 //	
-//	static private Bitmap createThumbnaiBitmap(GlobalParameters mGlblParms, 
+//	static private Bitmap createThumbnaiBitmap(GlobalParameters mGp, 
 //			byte[] data, DisplayMetrics dm) {
 //		BitmapFactory.Options options_sz = new BitmapFactory.Options();  
 //		options_sz.inJustDecodeBounds = true;
@@ -990,7 +990,7 @@ public class MainActivity extends AppCompatActivity {
 //		return th_bm;
 //	};
 	
-	static private MusicFileListItem getMasterFileList(GlobalParameters mGlblParms,
+	static private MusicFileListItem getMasterFileList(GlobalParameters mGp,
 			ArrayList<MusicFileListItem> masterFileList,
 			final String folderName, final String fileName) {
 		MusicFileListItem flci=null;

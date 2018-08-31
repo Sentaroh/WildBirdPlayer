@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 26
     buildToolsVersion '27.0.3'
 
     defaultConfig {
@@ -67,8 +67,8 @@ android {
 dependencies {
 //    implementation project(':Utilities')
 //    implementation(name:'Utilities-1.0.5', ext:'aar')
-    implementation files('libs/Utilities-1.0.12.aar')
-    implementation 'com.android.support:appcompat-v7:22.2.1'
+    implementation files('libs/Utilities-1.0.13.aar')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation files('libs/metadata-extractor-2.9.1.jar')
     implementation files('libs/xmpcore-5.1.2.jar')
     implementation files('libs/jaudiotagger-2.0.4-20111207.115108-15.jar')
